@@ -11,11 +11,16 @@
  Target Server Version : 50722
  File Encoding         : 65001
 
+  全局设置mysql时区
+  set global time_zone = '+8:00';
+  flush privileges;
+
  Date: 20/11/2018 14:06:31
 */
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
+SET TIME_ZONE = '+8:00';
 
 -- ----------------------------
 -- Table structure for author
