@@ -31,6 +31,13 @@ public class JooqController {
         return jooqService.getAuthors();
     }
 
+    @ApiOperation(value = "创建作者" ,  notes="创建作者")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "firstName", value = "firstName", required = true, dataType = "authorCommand"),
+            @ApiImplicitParam(name = "lastName", value = "lastName", required = true, dataType = "authorCommand"),
+            @ApiImplicitParam(name = "address", value = "地址", required = true, dataType = "authorCommand"),
+            @ApiImplicitParam(name = "dateOfBirthDay", value = "出生日期", required = true, dataType = "authorCommand")
+    })
     @PostMapping("/author")
     @ResponseStatus(HttpStatus.CREATED)
     public Integer addAuthor(@RequestBody AuthorCommand authorCommand){
@@ -40,6 +47,14 @@ public class JooqController {
                 authorCommand.getDateOfBirthDay());
     }
 
+    @ApiOperation(value = "修改作者信息" ,  notes="修改作者信息")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "id", value = "id", required = true, dataType = "int"),
+            @ApiImplicitParam(name = "firstName", value = "firstName", required = true, dataType = "AuthorCommand"),
+            @ApiImplicitParam(name = "lastName", value = "lastName", required = true, dataType = "AuthorCommand"),
+            @ApiImplicitParam(name = "address", value = "地址", required = true, dataType = "AuthorCommand"),
+            @ApiImplicitParam(name = "dateOfBirthDay", value = "出生日期", required = true, dataType = "AuthorCommand")
+    })
     @PutMapping("/author/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void updateAuthor(@PathVariable Integer id,
@@ -51,6 +66,10 @@ public class JooqController {
                 authorCommand.getDateOfBirthDay());
     }
 
+    @ApiOperation(value = "删除作者" ,  notes="删除作者")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "id", value = "id", required = true, dataType = "int")
+    })
     @DeleteMapping("/author/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteAuthor(@PathVariable Integer id){
@@ -58,10 +77,6 @@ public class JooqController {
     }
 
     @ApiOperation(value = "查询所有作者以及书籍信息" ,  notes="查询所有作者以及书籍信息")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "page", value = "页码", required = false ,dataType = "int"),
-            @ApiImplicitParam(name = "size", value = "页大小", required = false ,dataType = "int")
-    })
     @GetMapping("/bookDetails")
     @ResponseStatus(HttpStatus.OK)
     public Page<BookDetails> bookDetails(Pageable pageable){
