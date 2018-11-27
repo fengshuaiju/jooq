@@ -1,5 +1,7 @@
 package com.feng.jooq.controller;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import com.feng.jooq.config.View;
 import com.feng.jooq.representation.Author;
 import com.feng.jooq.representation.BookDetails;
 import com.feng.jooq.service.JooqService;
@@ -27,6 +29,8 @@ public class JooqController {
     @ApiOperation(value = "查询所有作者" ,  notes="查询所有作者")
     @GetMapping("/getAuthors")
     @ResponseStatus(HttpStatus.OK)
+    //该视图返回 '没有加view' 注释 和加 'Staff' 注释的字段
+    @JsonView(View.Staff.class)
     public List<Author> getAuthors(){
         return jooqService.getAuthors();
     }
