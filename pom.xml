@@ -1,220 +1,66 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.1.4.RELEASE</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+	<groupId>com.feng</groupId>
+	<artifactId>jooq</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>jooq</name>
+	<description>Demo project for Spring Boot</description>
 
-    <groupId>com.feng</groupId>
-    <artifactId>jooq</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-    <packaging>jar</packaging>
+	<properties>
+		<java.version>1.8</java.version>
+	</properties>
 
-    <name>jooq</name>
-    <description>Demo project for Spring Boot</description>
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-jooq</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
 
-    <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.1.0.RELEASE</version>
-        <relativePath/> <!-- lookup parent from repository -->
-    </parent>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
 
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <java.version>1.8</java.version>
-    </properties>
-
-    <dependencies>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-jooq</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-freemarker</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-jpa</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <optional>true</optional>
-        </dependency>
-        <dependency>
-            <groupId>org.simpleflatmapper</groupId>
-            <artifactId>sfm-jdbc</artifactId>
-            <version>3.19.0</version>
-        </dependency>
-        <!--Swagger-->
-        <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger2</artifactId>
-            <version>2.9.2</version>
-        </dependency>
-        <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger-ui</artifactId>
-            <version>2.9.2</version>
-        </dependency>
-        <dependency>
-            <groupId>javax.xml.bind</groupId>
-            <artifactId>jaxb-api</artifactId>
-            <version>2.3.0</version>
-        </dependency>
-
-    </dependencies>
-
-    <build>
-
-        <resources>
-            <resource>
-                <directory>src/main/resources/application.yml</directory>
-                <filtering>true</filtering>
-            </resource>
-        </resources>
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<scope>runtime</scope>
+		</dependency>
 
 
-        <plugins>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
+		</dependency>
 
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
 
-            <!--flyway com.feng.jooq.config-->
-            <plugin>
-                <groupId>org.flywaydb</groupId>
-                <artifactId>flyway-maven-plugin</artifactId>
-                <version>5.1.4</version>
-                <!-- 在代码生成时候执行Flyway插件 -->
-                <executions>
-                    <execution>
-                        <phase>generate-sources</phase>
-                        <goals>
-                            <goal>migrate</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <!-- 指定Flyway迁移脚本文件目录 -->
-                <configuration>
-                    <url>jdbc:mysql://127.0.0.1:3306/jooq?characterEncoding=utf-8</url>
-                    <schemas>jooq</schemas>
-                    <user>root</user>
-                    <password>fengshuaiju</password>
-                </configuration>
-                <dependencies>
-                    <dependency>
-                        <groupId>mysql</groupId>
-                        <artifactId>mysql-connector-java</artifactId>
-                        <version>${mysql.version}</version>
-                    </dependency>
-                </dependencies>
-            </plugin>
+	</dependencies>
 
-            <!-- The jOOQ code generator plugin -->
-            <plugin>
-                <groupId>org.jooq</groupId>
-                <artifactId>jooq-codegen-maven</artifactId>
-                <version>${jooq.version}</version>
-
-                <executions>
-                    <execution>
-                        <id>generate-mysql</id>
-                        <phase>generate-sources</phase>
-                        <goals>
-                            <goal>generate</goal>
-                        </goals>
-                    </execution>
-                </executions>
-
-                <dependencies>
-                    <dependency>
-                        <groupId>mysql</groupId>
-                        <artifactId>mysql-connector-java</artifactId>
-                        <version>${mysql.version}</version>
-                    </dependency>
-                </dependencies>
-
-                <configuration>
-                    <jdbc>
-                        <driver>com.mysql.cj.jdbc.Driver</driver>
-                        <url>jdbc:mysql://127.0.0.1:3306/jooq</url>
-                        <user>root</user>
-                        <password>fengshuaiju</password>
-                    </jdbc>
-                    <generator>
-                        <database>
-                            <name>org.jooq.meta.mysql.MySQLDatabase</name>
-                            <includes>.*</includes>
-                            <excludes/>
-                            <!--inputSchema即为数据库名-->
-                            <inputSchema>jooq</inputSchema>
-                            <forcedTypes>
-
-                                <forcedType>
-                                    <!-- Specify the Java type of your custom type. This corresponds to the Converter's <U> type. -->
-                                    <userType>java.time.LocalDateTime</userType>
-                                    <!-- Associate that custom type with your converter. -->
-                                    <converter>com.feng.jooq.config.JooqTimestampToLocalDateTimeConverter</converter>
-                                    <!--
-                                        Add a Java regular expression matching fully-qualified columns. Use the pipe to separate several expressions.
-                                        If provided, both "expressions" and "types" must match
-                                    -->
-                                    <expression>.*_AT</expression>
-                                    <!--
-                                           Add a Java regular expression matching data types to be forced to have this type.
-                                           Data types may be reported by your database as:
-                                           - NUMBER              regexp suggestion: NUMBER
-                                           - NUMBER(5)           regexp suggestion: NUMBER\(5\)
-                                           - NUMBER(5, 2)        regexp suggestion: NUMBER\(5,\s*2\)
-                                           - any other form.
-                                           It is thus recommended to use defensive regexes for types.
-                                           If provided, both "expressions" and "types" must match.
-                                    -->
-                                    <types>.*</types>
-                                </forcedType>
-
-                                <forcedType>
-                                    <userType>java.time.LocalDate</userType>
-                                    <converter>com.feng.jooq.config.JooqTimestampToLocalDateConverter</converter>
-                                    <expression>.*_DAY</expression>
-                                    <types>.*</types>
-                                </forcedType>
-
-                                <forcedType>
-                                    <userType>java.lang.Boolean</userType>
-                                    <converter>com.feng.jooq.config.JooqByteToBooleanConverter</converter>
-                                    <expression>.*\.IS_.*</expression>
-                                    <types>.*</types>
-                                </forcedType>
-
-                            </forcedTypes>
-                        </database>
-                        <target>
-                            <packageName>sprout.jooq.generate</packageName>
-                            <directory>target/generated-sources</directory>
-                        </target>
-                    </generator>
-                </configuration>
-            </plugin>
-
-        </plugins>
-    </build>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
 
 </project>
