@@ -4,10 +4,12 @@ import com.feng.jooq.Persistence.JooqPersistence;
 import com.feng.jooq.entity.Author;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@RequestMapping("jooq")
+@RestController
+@RequestMapping("/jooq")
 public class JooqController {
 
     private final JooqPersistence jooqPersistence;
